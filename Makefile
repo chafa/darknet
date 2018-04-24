@@ -27,7 +27,6 @@ OPTS=-Ofast
 LDFLAGS= -lm -pthread 
 COMMON= -Iinclude/ -Isrc/
 CFLAGS=-Wall -Wno-unused-result -Wno-unknown-pragmas -Wfatal-errors -fPIC
-NVCC += -D_FORCE_INLINES
 
 ifeq ($(OPENMP), 1) 
 CFLAGS+= -fopenmp
@@ -47,9 +46,10 @@ COMMON+= `pkg-config --cflags opencv`
 endif
 
 ifeq ($(GPU), 1) 
-COMMON+= -DGPU -I/usr/local/cuda/include/
+COMMON+= -DGPU -I/usr/local/cuda-9.1/include/
 CFLAGS+= -DGPU
-LDFLAGS+= -L/usr/local/cuda/lib64 -lcuda -lcudart -lcublas -lcurand
+LDFLAGS+= -L/usr/local/cuda-9.1/lib64 -lcuda -lcudart -lcublas -lcurand
+NVCC += -D_FORCE_INLINES
 endif
 
 ifeq ($(CUDNN), 1) 
