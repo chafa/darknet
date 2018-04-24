@@ -20,7 +20,7 @@ EXEC=darknet
 OBJDIR=./obj/
 
 CC=gcc
-NVCC=nvcc 
+NVCC=/usr/local/cuda-9.1/bin/nvcc 
 AR=ar
 ARFLAGS=rcs
 OPTS=-Ofast
@@ -49,7 +49,6 @@ ifeq ($(GPU), 1)
 COMMON+= -DGPU -I/usr/local/cuda-9.1/include/
 CFLAGS+= -DGPU
 LDFLAGS+= -L/usr/local/cuda-9.1/lib64 -lcuda -lcudart -lcublas -lcurand
-NVCC += -D_FORCE_INLINES
 endif
 
 ifeq ($(CUDNN), 1) 
